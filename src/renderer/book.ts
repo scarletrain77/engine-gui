@@ -1,12 +1,10 @@
-class Book extends engine.DisplayObjectContainer {
+class Book {
     private _bookName: string;
     private _bookId: string;
     private _bookAmount: number = 0;
     private _bookAuthor: string;
-    bookTextField: engine.TextField;
 
     constructor(bookId?: string, bookName?: string, bookAuthor?: string) {
-        super();
         if (!bookName) {
             this._bookName = "UNKNOWN";
         } else {
@@ -20,25 +18,24 @@ class Book extends engine.DisplayObjectContainer {
         this._bookAmount++;
         if (!bookId) {
             this._bookId = this._bookAmount.toString();
-        }else{
+        } else {
             this._bookId = bookId;
         }
-        this.bookTextField = new engine.TextField();
-        this.updateTextField();
-        this.addChild(this.bookTextField);
+
     }
 
-    updateTextField() {
-        this.bookTextField.text = "id:" + this._bookId +
+    get bookInfo() {
+        return "id:" + this._bookId +
             "Name:" + this._bookName +
             "Author:" + this._bookAuthor;
     }
+
 
     get bookId() {
         return this._bookId;
     }
 
-    set bookId(id: string){
+    set bookId(id: string) {
         this.bookId = id;
     }
 
@@ -58,6 +55,19 @@ class Book extends engine.DisplayObjectContainer {
         return this._bookAuthor;
     }
 }
-class Button extends engine.DisplayObjectContainer {
+class BookContainer extends engine.DisplayObjectContainer {
+    books: Book[] = [];
+    bookTextField: engine.TextField;
+
+    constructor() {
+        super();
+        this.bookTextField = new engine.TextField();
+        this.updateTextField();
+        this.addChild(this.bookTextField);
+    }
+
+    updateTextField() {
+
+    }
 
 }
